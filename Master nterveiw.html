@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Interview Playbook - Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preview-container {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .preview-header {
+            background: linear-gradient(to right, #4A90E2, #9013FE);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            position: relative;
+        }
+
+        .preview-header h1 {
+            font-size: 2.2em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .preview-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .preview-badge {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .content-preview {
+            padding: 30px;
+        }
+
+        .question-block {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 20px;
+            gap: 20px;
+            margin-bottom: 25px;
+            border: 2px solid #f0f0f0;
+        }
+
+        .question {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4A90E2;
+            margin-bottom: 12px;
+        }
+
+        .question-number {
+            color: #9013FE;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .answer {
+            font-size: 0.95em;
+            line-height: 1.5em;
+            color: #333;
+            position: relative;
+        }
+
+        .answer-blur {
+            filter: blur(3px);
+            opacity: 0.6;
+            position: relative;
+        }
+
+        .answer-blur::after {
+            content: '🔒 Full Answer Available in Complete Guide';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(74, 144, 226, 0.9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            white-space: nowrap;
+            filter: none;
+            opacity: 1;
+        }
+
+        .notes {
+            background: #f9f9fb;
+            border-left: 4px solid #4A90E2;
+            padding: 15px;
+            font-style: italic;
+            border-radius: 5px;
+        }
+
+        .note-lines-preview {
+            border: none;
+            border-bottom: 1px dotted #bbb;
+            width: 100%;
+            margin: 4px 0;
+            height: 20px;
+            background: transparent;
+            opacity: 0.5;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .preview-features {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .preview-features h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .feature-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-item h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .feature-item p {
+            font-size: 0.9em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .cta-section {
+            background: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .pricing-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .original-price {
+            font-size: 1.3em;
+            color: #7f8c8d;
+            text-decoration: line-through;
+            text-decoration-color: #e74c3c;
+            text-decoration-thickness: 3px;
+        }
+
+        .sale-price {
+            font-size: 1.8em;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .sale-tag {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        .sale-tag::before {
+            content: '🔥';
+            margin-right: 8px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+            padding: 18px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(39, 174, 96, 0.4);
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 4em;
+            color: rgba(74, 144, 226, 0.1);
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .sample-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(144, 19, 254, 0.9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .question-block {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .preview-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        <div class="sample-badge">📖 SAMPLE PREVIEW</div>
+        
+        <div class="preview-header">
+            <div class="preview-badge">20 Q&A + Bonuses</div>
+            <h1>Ultimate Interview Playbook</h1>
+            <p>20 Powerful Q&A with Personal Notes Space</p>
+        </div>
+
+        <div class="content-preview">
+            <div class="watermark">PREVIEW</div>
+            
+            <!-- Sample Question 1 - Full Visible -->
+            <div class="question-block">
+                <div>
+                    <div class="question"><span class="question-number">1.</span>Tell me about yourself.</div>
+                    <div class="answer">I'm someone who thrives on continuous learning and building meaningful connections. Outside of work, I'm passionate about <strong>[creative hobby/interest]</strong>, which has sharpened my ability to think outside the box. Professionally, I've spent the last <strong>[X years]</strong> excelling in roles that combine...</div>
+                </div>
+                <div class="notes">
+                    <strong>Your Notes / Personal Version:</strong>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                </div>
+            </div>
+
+            <!-- Sample Question 2 - Blurred Answer -->
+            <div class="question-block">
+                <div>
+                    <div class="question"><span class="question-number">4.</span>Why do you want to work here?</div>
+                    <div class="answer answer-blur">Your company's commitment to [specific value or mission] resonates with me. I'm drawn to how you [specific project or initiative], and I believe my expertise in [related skill] would directly support that mission while allowing me to grow alongside an innovative team.</div>
+                    <div class="tip-box">
+                        <strong>🔍 Research Tip:</strong> Before your interview, visit the employer's website to gather this information! Look for their mission statement, core values, and recent projects/initiatives...
+                    </div>
+                </div>
+                <div class="notes">
+                    <strong>Your Notes / Personal Version:</strong>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                </div>
+            </div>
+
+            <!-- Sample Question 3 - Blurred Answer -->
+            <div class="question-block">
+                <div>
+                    <div class="question"><span class="question-number">11.</span>What are your salary expectations?</div>
+                    <div class="answer answer-blur">I appreciate you asking for clarity on this. Based on my research and experience, I'm seeking a range that reflects the industry standards and the unique contributions I plan to make. Could you share the budgeted range for this role?</div>
+                </div>
+                <div class="notes">
+                    <strong>Your Notes / Personal Version:</strong>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                    <input class="note-lines-preview" type="text" disabled/>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-features">
+            <h2>What You Get in the Complete Playbook</h2>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>🎯 20 Essential Questions</h3>
+                    <p>Master answers to the most common interview questions with proven, professional responses</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>📝 Personal Notes Space</h3>
+                    <p>Customize each answer with your own experiences and make it authentically yours</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>💡 Pro Tips & Research Guides</h3>
+                    <p>Insider strategies for salary research, company preparation, and power moves</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>🌟 Bonus Power Question</h3>
+                    <p>The game-changing question that flips the script and gets real-time feedback</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>🎨 Creative Resume Template</h3>
+                    <p>Stand out with the "Aurora" design concept and professional templates</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>🏆 Certificate of Excellence</h3>
+                    <p>Customizable achievement certificate to showcase your commitment to excellence</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Master Every Interview?</h2>
+            <p>Get the complete Ultimate Interview Playbook with all 20 questions, answers, tips, and bonuses!</p>
+            
+            <div class="pricing-container">
+                <span class="original-price">$14.99</span>
+                <span class="sale-price">$9.99</span>
+                <div class="sale-tag">Limited Sale</div>
+            </div>
+            
+            <a href="https://stan.store/SocialMSerenity" class="cta-button" target="_blank">Get Complete Playbook Now</a>
+            
+            <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
+                ✨ Instant download • Print-ready format • Lifetime access
+            </p>
+        </div>
+    </div>
+</body>
+</html>
